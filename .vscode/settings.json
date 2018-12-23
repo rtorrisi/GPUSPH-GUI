@@ -1,0 +1,52 @@
+{
+  "files.associations": {
+    ".babelrc": "jsonc",
+    ".eslintrc": "jsonc",
+    ".prettierrc": "jsonc",
+
+    ".stylelintrc": "json",
+
+    ".dockerignore": "ignore",
+    ".eslintignore": "ignore",
+    ".flowconfig": "ignore"
+  },
+
+  "javascript.validate.enable": false,
+  "javascript.format.enable": false,
+  "typescript.validate.enable": false,
+  "typescript.format.enable": false,
+
+  "flow.useNPMPackagedFlow": true,
+  "search.exclude": {
+    ".git": true,
+    ".eslintcache": true,
+    "app/dist": true,
+    "app/main.prod.js": true,
+    "app/main.prod.js.map": true,
+    "bower_components": true,
+    "dll": true,
+    "flow-typed": true,
+    "release": true,
+    "node_modules": true,
+    "npm-debug.log.*": true,
+    "yarn.lock": true
+  },
+  "files.exclude": {
+    ".dockerignore": true,
+    ".editorconfig": true,
+    ".eslint*": true,
+    ".flowconfig": true,
+    ".prettierrc": true,
+    ".stylelintrc": true,
+    "*.yml": true,
+    "babel.config.js": true,
+    "configs/": true,
+    "dist/": true,
+    "dll/": true,
+    "flow-typed/": true,
+    "internals/": true,
+    "release/": true,
+    "renovate.json": true,
+    ".vscode/": true
+  }
+}
