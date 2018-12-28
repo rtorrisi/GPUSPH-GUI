@@ -1,3 +1,9 @@
+# simulations output directory
+tests
+
+# GPUSPH executable
+GPUSPH.exe
+
 # Logs
 logs
 *.log
