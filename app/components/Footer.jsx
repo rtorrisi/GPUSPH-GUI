@@ -7,13 +7,16 @@ type Props = {
 };
 
 class Footer extends Component<Props> {
-  state = () => {
+  constructor(props) {
+    super(props);
+
     const { logo, version } = this.props;
-    return {
+
+    this.state = {
       version: `v${version}`,
       logo
     };
-  };
+  }
 
   render() {
     const { footer, logoStyle, textStyle } = styles;
