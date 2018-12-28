@@ -1,0 +1,50 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  min-height: 130px;
+  min-width: 400px;
+  height: 100%;
+  display: flex;
+}
+
+.frame {
+  flex: 1;
+  display: flex;
+  margin: 10px;
+  background-color: #1c1e23;
+  border-top-left-radius: 60px;
+  border-bottom-right-radius: 60px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.border {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  border-top-left-radius: 60px;
+  border-bottom-right-radius: 60px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  margin: 3px;
+}
+
+img {
+  width: 60%;
+  animation: logo-anim infinite 1s alternate;
+}
+
+@keyframes logo-anim {
+  from {
+    transform: scale(0.9);
+  }
+  to {
+    transform: rotate(1);
+  }
+}
