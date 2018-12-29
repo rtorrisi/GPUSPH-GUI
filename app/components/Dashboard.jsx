@@ -6,7 +6,9 @@ import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Chip from '@material-ui/core/Chip';
+import LinearProgress from '@material-ui/core/LinearProgress';
 import DoneIcon from '@material-ui/icons/Done';
+import { withStyles } from '@material-ui/core/styles';
 
 import Footer from './Footer';
 import Header from './Header';
@@ -15,6 +17,19 @@ import Chart from './Chart';
 import styles from './styles/Dashboard.css';
 
 import GPUSPHLogo from '../../resources/gpusph-logo.png';
+
+const wstyles = () => ({
+  linearColorPrimary: {
+    // main bar
+    backgroundColor: '#00d6b4',
+    padding: '1px',
+    margin: '5px',
+    borderRadius: '20px'
+  },
+  linearBarColorPrimary: {
+    backgroundColor: '#00695c'
+  }
+});
 
 type Props = {
   urlParseParam: string => void,
@@ -31,10 +46,15 @@ type Props = {
   capability: string,
   outDir: string,
   simulation: [],
-  maxIter: number
+  maxIter: number,
+  classes: { linearColorPrimary: {}, linearBarColorPrimary: {} }
 };
 
-export default class Dashboard extends Component<Props> {
+class Dashboard extends Component<Props> {
+  state = {
+    isSimulating: false
+  };
+
   componentWillMount = () => {
     const { urlParseParam } = this.props;
     urlParseParam(document.location.href);
@@ -49,14 +69,20 @@ export default class Dashboard extends Component<Props> {
     ipcRenderer.on('simPass:data', (event, simulationPass) => {
       addSimulationPass(simulationPass);
     });
+
+    ipcRenderer.on('childClosed:code', () => {
+      this.setState({ isSimulating: false });
+    });
   };
 
   componentWillUnmount = () => {
     ipcRenderer.removeListener('stdout:data');
     ipcRenderer.removeListener('simPass:data');
+    ipcRenderer.removeListener('childClosed:code');
   };
 
   startSimulation = () => {
+    this.setState({ isSimulating: true });
     const { maxIter, outDir, resetSimulation } = this.props;
 
     resetSimulation();
@@ -69,7 +95,10 @@ export default class Dashboard extends Component<Props> {
     ipcRenderer.send('process:start', GPUSPHArguments);
   };
 
-  stopSimulation = () => ipcRenderer.send('process:stop');
+  stopSimulation = () => {
+    this.setState({ isSimulating: false });
+    ipcRenderer.send('process:stop');
+  };
 
   render() {
     const {
@@ -84,14 +113,20 @@ export default class Dashboard extends Component<Props> {
       simulation,
       toggleParam,
       setMaxIter,
-      setOutDir
+      setOutDir,
+      classes
     } = this.props;
+
+    const { linearColorPrimary, linearBarColorPrimary } = classes;
+
+    const { isSimulating } = this.state;
+
     return (
       <div className={styles.frame}>
         <Header leftTitle={problemName} rightTitle={version} />
         <div className={styles.schema}>
           <div className={styles.leftBar}>
-            {capability}
+            <p align="center">{`compute capability ${capability}`}</p>
             <Chip
               icon={HDF5 ? <DoneIcon /> : null}
               label="HDF5"
@@ -161,7 +196,16 @@ export default class Dashboard extends Component<Props> {
                 }
               />
             </div>
-            <div style={{ flex: 1 }} />
+            <div style={{ flex: 1 }}>
+              {isSimulating ? (
+                <LinearProgress
+                  classes={{
+                    colorPrimary: linearColorPrimary,
+                    barColorPrimary: linearBarColorPrimary
+                  }}
+                />
+              ) : null}
+            </div>
           </div>
         </div>
         <Footer logo={GPUSPHLogo} version="0.0.1-alpha" />
@@ -169,6 +213,8 @@ export default class Dashboard extends Component<Props> {
     );
   }
 }
+
+export default withStyles(wstyles)(Dashboard);
 /*
   <div style={{ flex: 2, border: '3px solid orange' }}>
       <ScrollbarDiv className={styles.centralFrame}>
