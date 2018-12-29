@@ -7,18 +7,22 @@ type Content = { x: number, y: number };
 type Props = {
   chartTitle: string,
   chartData: Array<Content>,
-  chartTension?: number
+  chartTension?: number,
+  xLabel?: string,
+  yLabel?: string
 };
 
 class Chart extends Component<Props> {
   static defaultProps = {
-    chartTension: 0.5
+    chartTension: 0.5,
+    xLabel: 'x-Axis',
+    yLabel: 'y-Axis'
   };
 
   constructor(props) {
     super(props);
 
-    const { chartTitle, chartTension } = this.props;
+    const { chartTitle, chartTension, xLabel, yLabel } = this.props;
 
     this.state = {
       data: canvas => {
@@ -97,46 +101,47 @@ class Chart extends Component<Props> {
           lineHeight: 1
         },
         tooltips: {
-          //   enable: true,
-          //   custom: null,
-          //   mode: "nearest",
-          //   intersect: false,
-          //   position: "average",
-          //   backgroundColor: "#f5f5f5",
-          //   titleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-          //   titleFontSize: 12,
-          //   titleFontStyle: 'bold',
-          //   titleFontColor: "#333",
-          //   titleSpacing: 2,
-          //   titleMarginBottom: 6,
-          //   bodyFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-          //   bodyFontSize: 12,
-          //   bodyFontStyle: 'normal',
-          //   bodyFontColor: "#666",
-          //   bodySpacing: 4,
-          //   footerFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
-          //   footerFontSize: 12,
-          //   footerFontStyle: 'bold',
-          //   footerFontColor: "#666",
-          //   footerSpacing: 2,
-          //   footerMarginTop: 6,
-          //   xPadding: 6,
-          //   yPadding: 6,
-          //   caretPadding: 2,
-          //   caretSize: 5,
-          //   cornerRadius: 6,
-          //   multiKeyBackground: '#fff',
-          //   displayColors: true,
-          //   borderColor: 'rgba(0,0,0,1)',
-          //   borderWidth: 0,
-          //   callbacks: {
-          //     beforeTitle : function(tooltipItem, data) {
-          //       return '';
-          //     },
-          //     footer : function(tooltipItem, data) {
-          //       return '';
-          //     }
+          enable: true,
+          custom: null,
+          mode: 'nearest',
+          intersect: false,
+          position: 'average',
+          backgroundColor: '#f5f5f5',
+          titleFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+          titleFontSize: 12,
+          titleFontStyle: 'bold',
+          titleFontColor: '#333',
+          titleSpacing: 2,
+          titleMarginBottom: 6,
+          bodyFontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+          bodyFontSize: 12,
+          bodyFontStyle: 'normal',
+          bodyFontColor: '#666',
+          bodySpacing: 4,
+          footerFontFamily:
+            "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
+          footerFontSize: 12,
+          footerFontStyle: 'bold',
+          footerFontColor: '#666',
+          footerSpacing: 2,
+          footerMarginTop: 6,
+          xPadding: 6,
+          yPadding: 6,
+          caretPadding: 2,
+          caretSize: 5,
+          cornerRadius: 6,
+          multiKeyBackground: '#fff',
+          displayColors: true,
+          borderColor: 'rgba(0,0,0,1)',
+          borderWidth: 0
+          // callbacks: {
+          //   beforeTitle : function(tooltipItem, data) {
+          //     return '';
+          //   },
+          //   footer : function(tooltipItem, data) {
+          //     return '';
           //   }
+          // }
         },
         scales: {
           yAxes: [
@@ -154,16 +159,16 @@ class Chart extends Component<Props> {
                 drawTicks: true,
                 tickMarkLength: 10,
 
-                // zeroLineWidth: 1,
-                // zeroLineColor: "rgba(0,0,0,1)",
-                // zeroLineBorderDash: [5,5],
-                // zeroLineBorderDashOffset: 0,
+                zeroLineWidth: 2,
+                zeroLineColor: 'rgba(255,255,255,0.5)',
+                zeroLineBorderDash: [5, 5],
+                zeroLineBorderDashOffset: 0,
 
                 offsetGridLines: false
               },
               scaleLabel: {
                 display: true,
-                labelString: 'y-axis',
+                labelString: yLabel,
                 lineHeight: 1,
 
                 fontSize: 12,
@@ -217,16 +222,16 @@ class Chart extends Component<Props> {
                 drawTicks: false,
                 tickMarkLength: 10,
 
-                // zeroLineWidth: 1,
-                // zeroLineColor: "rgba(0,0,0,1)",
+                zeroLineWidth: 2,
+                zeroLineColor: 'rgba(255,255,255,0.5)',
                 // zeroLineBorderDash: [5,5],
-                // zeroLineBorderDashOffset: 0,
+                zeroLineBorderDashOffset: 0,
 
                 offsetGridLines: false
               },
               scaleLabel: {
                 display: true,
-                labelString: 'x-axis',
+                labelString: xLabel,
                 lineHeight: 1,
 
                 fontSize: 12,

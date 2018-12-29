@@ -138,6 +138,8 @@ export default class Dashboard extends Component<Props> {
             <div className={styles.chartView}>
               <Chart
                 chartTitle="Simulation Chart"
+                xLabel="my X"
+                yLabel="my Y"
                 chartTension={0.5}
                 chartData={
                   simulation.length
