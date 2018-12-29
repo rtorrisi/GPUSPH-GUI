@@ -2,7 +2,9 @@ import {
   SET_INSTANCE_PARAM,
   TOGGLE_PARAM,
   SET_MAX_ITER,
-  SET_OUT_DIR
+  SET_OUT_DIR,
+  ADD_SIMULATION_PASS,
+  RESET_SIMULATION
 } from '../actions/instanceActions';
 import type { Action } from './types';
 
@@ -20,6 +22,16 @@ const initialState = {
 
 export default function instance(state = initialState, action: Action) {
   switch (action.type) {
+    case ADD_SIMULATION_PASS:
+      return {
+        ...state,
+        simulation: [...state.simulation, action.simulationPass]
+      };
+    case RESET_SIMULATION:
+      return {
+        ...state,
+        simulation: []
+      };
     case SET_OUT_DIR:
       return { ...state, outDir: action.path };
     case SET_MAX_ITER:

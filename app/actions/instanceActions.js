@@ -1,8 +1,23 @@
 // @flow
+export const ADD_SIMULATION_PASS = 'ADD_SIMULATION_PASS';
+export const RESET_SIMULATION = 'RESET_SIMULATION';
 export const SET_OUT_DIR = 'SET_OUT_DIR';
 export const SET_MAX_ITER = 'SET_MAX_ITER';
 export const TOGGLE_PARAM = 'TOGGLE_PARAM';
 export const SET_INSTANCE_PARAM = 'SET_INSTANCE_PARAM';
+
+export function resetSimulation() {
+  return {
+    type: RESET_SIMULATION
+  };
+}
+
+export function addSimulationPass(simulationPass: {}) {
+  return {
+    type: ADD_SIMULATION_PASS,
+    simulationPass
+  };
+}
 
 export function setOutDir(path: string) {
   return {
