@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { ipcRenderer } from 'electron';
 
 import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
 import TextField from '@material-ui/core/TextField';
 import Chip from '@material-ui/core/Chip';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -17,17 +17,19 @@ import Chart from './Chart';
 import styles from './styles/Dashboard.css';
 
 import GPUSPHLogo from '../../resources/gpusph-logo.png';
+import FilledCircleIcon from '../../resources/icons/filledCircle.svg';
+import PlayIcon from '../../resources/icons/play.svg';
+import StopIcon from '../../resources/icons/stop.svg';
 
 const wstyles = () => ({
   linearColorPrimary: {
-    // main bar
-    backgroundColor: '#00d6b4',
+    backgroundColor: '#00695c',
     padding: '1px',
     margin: '5px',
     borderRadius: '20px'
   },
   linearBarColorPrimary: {
-    backgroundColor: '#00695c'
+    backgroundColor: '#00d6b4'
   }
 });
 
@@ -51,9 +53,15 @@ type Props = {
 };
 
 class Dashboard extends Component<Props> {
-  state = {
-    isSimulating: false
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isSimulating: false
+    };
+
+    this.startStopSimulation = this.startStopSimulation.bind(this);
+  }
 
   componentWillMount = () => {
     const { urlParseParam } = this.props;
@@ -79,6 +87,12 @@ class Dashboard extends Component<Props> {
     ipcRenderer.removeListener('stdout:data');
     ipcRenderer.removeListener('simPass:data');
     ipcRenderer.removeListener('childClosed:code');
+  };
+
+  startStopSimulation = () => {
+    const { isSimulating } = this.state;
+    if (isSimulating) this.stopSimulation();
+    else this.startSimulation();
   };
 
   startSimulation = () => {
@@ -146,9 +160,6 @@ class Dashboard extends Component<Props> {
               className={styles.chips}
             />
             <Card style={{ margin: '10px', padding: '10px' }}>
-              <Button variant="contained" onClick={this.startSimulation}>
-                Run Simulation
-              </Button>
               <TextField
                 label="Out directory"
                 value={outDir}
@@ -164,9 +175,6 @@ class Dashboard extends Component<Props> {
                 margin="normal"
                 variant="outlined"
               />
-              <Button variant="contained" onClick={this.stopSimulation}>
-                Stop Simulation
-              </Button>
             </Card>
           </div>
           <div className={styles.centralViewport}>
@@ -196,15 +204,41 @@ class Dashboard extends Component<Props> {
                 }
               />
             </div>
-            <div style={{ flex: 1 }}>
+            <div className={styles.controllView}>
+              <div className={styles.controllBar}>
+                <Fab
+                  onClick={this.startStopSimulation}
+                  className={styles.startStopButton}
+                  size="large"
+                  color="primary"
+                >
+                  <img
+                    style={{ width: '100%' }}
+                    alt={isSimulating ? 'stop' : 'play'}
+                    src={isSimulating ? StopIcon : PlayIcon}
+                  />
+                </Fab>
+                <img className={styles.circle} alt="" src={FilledCircleIcon} />
+              </div>
               {isSimulating ? (
                 <LinearProgress
+                  style={{ margin: '7px' }}
                   classes={{
                     colorPrimary: linearColorPrimary,
                     barColorPrimary: linearBarColorPrimary
                   }}
                 />
-              ) : null}
+              ) : (
+                <LinearProgress
+                  variant="determinate"
+                  value={0}
+                  style={{ margin: '7px' }}
+                  classes={{
+                    colorPrimary: linearColorPrimary,
+                    barColorPrimary: linearBarColorPrimary
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
