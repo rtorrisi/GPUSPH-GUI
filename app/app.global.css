@@ -3,11 +3,15 @@
  *        See https://github.com/webpack-contrib/sass-loader#imports
  * example @import "~@fortawesome/fontawesome-free/css/all.css";
  */
+
+@import '~typeface-roboto/index.css';
+
 html,
 body {
   height: 100%;
   margin: 0;
   color: white;
+  font-family: Roboto, sans-serif;
 }
 
 body > div {
