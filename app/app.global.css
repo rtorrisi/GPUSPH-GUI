@@ -12,6 +12,8 @@ body {
   margin: 0;
   color: white;
   font-family: Roboto, sans-serif;
+  overflow-y: hidden;
+  background-color: #1c1e23;
 }
 
 body > div {
