@@ -5,8 +5,10 @@
   align-items: center;
   border-top: 1px solid #111;
   height: 25px;
+  min-height: 25px;
   max-height: 25px;
   padding: 0 20px 0 20px;
+  z-index: 100;
 }
 
 .logoStyle {

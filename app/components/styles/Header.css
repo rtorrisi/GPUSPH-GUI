@@ -5,8 +5,10 @@
   align-items: center;
   border-bottom: 1px solid #111;
   height: 47px;
+  min-height: 47px;
   max-height: 47px;
   padding: 0 20px 0 20px;
+  z-index: 100;
 }
 
 .headerColor,
