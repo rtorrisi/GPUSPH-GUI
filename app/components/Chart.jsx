@@ -5,7 +5,6 @@ import { Scatter } from 'react-chartjs-2';
 type Content = { x: number, y: number };
 
 type Props = {
-  chartTitle: string,
   chartData: Array<Content>,
   chartTension?: number,
   xLabel?: string,
@@ -22,7 +21,7 @@ class Chart extends Component<Props> {
   constructor(props) {
     super(props);
 
-    const { chartTitle, chartTension, xLabel, yLabel } = this.props;
+    const { chartTension, xLabel, yLabel } = this.props;
 
     this.state = {
       data: canvas => {
@@ -90,8 +89,8 @@ class Chart extends Component<Props> {
           }
         },
         title: {
-          text: [chartTitle],
-          display: true,
+          text: '',
+          display: false,
           position: 'top',
           fontSize: 18,
           fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",

@@ -20,7 +20,7 @@
 }
 
 .chartView {
-  padding: 5px;
+  padding: 10px;
   flex: 1;
   display: flex;
   min-height: 140px;

@@ -138,7 +138,6 @@ class Dashboard extends Component<Props> {
           <div className={styles.centralViewport}>
             <div className={styles.chartView}>
               <Chart
-                chartTitle="Performance Chart"
                 xLabel="my X"
                 yLabel="my Y"
                 chartTension={0.2}
