@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 import Fab from '@material-ui/core/Fab';
 import TextField from '@material-ui/core/TextField';
 import LinearProgress from '@material-ui/core/LinearProgress';
-
-import { withStyles } from '@material-ui/core/styles';
-
 import Infinite from '@material-ui/icons/AllInclusive';
+
 import FilledCircleIcon from '../../resources/icons/filledCircle.svg';
 import PlayIcon from '../../resources/icons/play.svg';
 import StopIcon from '../../resources/icons/stop.svg';
@@ -34,7 +34,7 @@ class SimulationControlBar extends Component<Props> {
       if (maxIter !== 0) return `${percProgress}%`;
       return <Infinite />;
     }
-    return 'ready!';
+    return null;
   };
 
   createLinearProgress = (
@@ -69,17 +69,6 @@ class SimulationControlBar extends Component<Props> {
         />
       );
     }
-    return (
-      <LinearProgress
-        variant="determinate"
-        value={0}
-        style={{ margin: '7px' }}
-        classes={{
-          colorPrimary: linearColorPrimary,
-          barColorPrimary: linearBarColorPrimary
-        }}
-      />
-    );
   };
 
   render() {
@@ -98,8 +87,7 @@ class SimulationControlBar extends Component<Props> {
       controlRightView,
       controlLeftView,
       controlCentralSubView,
-      circle,
-      percProgView
+      circle
     } = styles;
     const {
       inputLabel,
@@ -107,7 +95,12 @@ class SimulationControlBar extends Component<Props> {
       inputText,
       inputOutlineFocused,
       inputOutline,
-      startStopButton
+      startButton,
+      stopButton,
+      percProgViewSimulating,
+      percProgViewNotSimulating,
+      progressViewSimulating,
+      progressViewNotSimulating
     } = classes;
 
     return (
@@ -139,7 +132,12 @@ class SimulationControlBar extends Component<Props> {
             <div className={controlCentralSubView}>
               <Fab
                 onClick={startStopSimulation}
-                classes={{ root: startStopButton }}
+                classes={{
+                  root: classNames({
+                    [stopButton]: isSimulating,
+                    [startButton]: !isSimulating
+                  })
+                }}
                 size="large"
                 color="primary"
               >
@@ -151,7 +149,12 @@ class SimulationControlBar extends Component<Props> {
               </Fab>
               <img className={circle} alt="" src={FilledCircleIcon} />
             </div>
-            <div className={percProgView}>
+            <div
+              className={classNames({
+                [percProgViewSimulating]: isSimulating,
+                [percProgViewNotSimulating]: !isSimulating
+              })}
+            >
               {this.createPercProgrInfo(isSimulating, maxIter, percProgress)}
             </div>
           </div>
@@ -179,7 +182,14 @@ class SimulationControlBar extends Component<Props> {
             />
           </div>
         </div>
-        {this.createLinearProgress(isSimulating, maxIter, percProgress)}
+        <div
+          className={classNames({
+            [progressViewSimulating]: isSimulating,
+            [progressViewNotSimulating]: !isSimulating
+          })}
+        >
+          {this.createLinearProgress(isSimulating, maxIter, percProgress)}
+        </div>
       </div>
     );
   }
@@ -205,13 +215,46 @@ const wstyles = () => ({
       borderColor: 'white !important'
     }
   },
-  startStopButton: {
+  startButton: {
     position: 'absolute',
     left: '7px',
-    bottom: '8px',
+    bottom: '7px',
     zIndex: '12',
     backgroundColor: '#272a31',
-    border: '2px solid #b1b7c2'
+    border: '2px solid #b1b7c2',
+    transition: 'transform 1s',
+    transform: 'rotate(0deg)'
+  },
+  stopButton: {
+    position: 'absolute',
+    left: '7px',
+    bottom: '7px',
+    zIndex: '12',
+    backgroundColor: '#272a31',
+    border: '2px solid #b1b7c2',
+    transition: 'transform 2s',
+    transform: 'rotate(180deg)'
+  },
+  percProgViewSimulating: {
+    flex: '1',
+    display: 'flex',
+    alignItems: 'center',
+    opacity: '1',
+    transition: 'flex 2s, opacity 4s'
+  },
+  percProgViewNotSimulating: {
+    opacity: '0',
+    transition: 'flex 1s, opacity 0.5s'
+  },
+  progressViewSimulating: {
+    height: '20px',
+    opacity: '1',
+    transition: 'opacity 4s, height 2s'
+  },
+  progressViewNotSimulating: {
+    height: '5px',
+    opacity: '0',
+    transition: 'opacity 4s, height 1s'
   },
   linearColorPrimary: {
     backgroundColor: '#00695c',

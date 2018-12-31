@@ -22,16 +22,11 @@
   align-items: center;
 }
 
-.percProgView {
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-
 .controlCentralSubView {
   flex: 1;
   position: relative;
   width: 70px;
+  margin-bottom: 5px;
 }
 
 .circle {
@@ -42,6 +37,6 @@
 
 .controlBar {
   display: flex;
-  height: 65px;
+  height: 80px;
   background-color: #313641;
 }
