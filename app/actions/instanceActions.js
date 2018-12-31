@@ -1,14 +1,21 @@
 // @flow
+export const SET_RUNNING_SIMULATION_STATUS = 'SET_RUNNING_SIMULATION_STATUS';
 export const ADD_SIMULATION_PASS = 'ADD_SIMULATION_PASS';
-export const RESET_SIMULATION = 'RESET_SIMULATION';
+export const REMOVE_OLD_SIMULATION_DATA = 'REMOVE_OLD_SIMULATION_DATA';
 export const SET_OUT_DIR = 'SET_OUT_DIR';
 export const SET_MAX_ITER = 'SET_MAX_ITER';
 export const TOGGLE_PARAM = 'TOGGLE_PARAM';
 export const SET_INSTANCE_PARAM = 'SET_INSTANCE_PARAM';
 
-export function resetSimulation() {
+export function setRunningSimulationStatus(status: boolean) {
   return {
-    type: RESET_SIMULATION
+    type: SET_RUNNING_SIMULATION_STATUS,
+    status
+  };
+}
+export function removeOldSimulationData() {
+  return {
+    type: REMOVE_OLD_SIMULATION_DATA
   };
 }
 
