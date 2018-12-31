@@ -2,6 +2,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Dashboard from '../components/Dashboard';
 import * as instanceActions from '../actions/instanceActions';
+import * as UIActions from '../actions/UIActions';
 
 function mapStateToProps(state) {
   return {
@@ -13,12 +14,20 @@ function mapStateToProps(state) {
     capability: state.instance.capability,
     maxIter: state.instance.maxIter,
     outDir: state.instance.outDir,
-    simulation: state.instance.simulation
+    simulation: state.instance.simulation,
+    isSimulating: state.instance.isSimulating,
+
+    isDrawerOpen: state.UI.isDrawerOpen
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(instanceActions, dispatch);
+  return {
+    actions: {
+      instanceActions: bindActionCreators(instanceActions, dispatch),
+      UIActions: bindActionCreators(UIActions, dispatch)
+    }
+  };
 }
 
 export default connect(
