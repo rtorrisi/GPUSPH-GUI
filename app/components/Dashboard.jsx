@@ -9,6 +9,7 @@ import Header from './Header';
 import Chart from './Chart';
 import DrawerBar from './DrawerBar';
 import SimulationControlBar from './SimulationControlBar';
+import SimulationTable from './SimulationTable';
 
 import styles from './styles/Dashboard.css';
 
@@ -147,6 +148,7 @@ class Dashboard extends Component<Props> {
                 }))}
               />
             </div>
+            <SimulationTable tableData={simulation} />
             <SimulationControlBar
               isSimulating={isSimulating}
               simulation={simulation}
