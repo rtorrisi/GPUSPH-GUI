@@ -180,7 +180,9 @@ function runSimulation(GPUSPHArguments) {
 
     lines.forEach(element => {
       if (re.test(element)) {
-        const lineInfo = {};
+        const lineInfo = {
+          MIPPS: {}
+        };
         const indices = {
           start: 0,
           end: 0
@@ -188,12 +190,12 @@ function runSimulation(GPUSPHArguments) {
 
         lineInfo.time = element.substring(
           (indices.start = indices.end + 18), // "Simulation time t=".length() = 18
-          (indices.end = element.indexOf('iteration', indices.start) - 2)
+          (indices.end = element.indexOf('s', indices.start))
         );
 
         lineInfo.iteration = element
           .substr(
-            (indices.start = indices.end + 12), // ", iteration=".length() = 12
+            (indices.start = indices.end + 13), // "s, iteration=".length() = 13
             (indices.end = element.indexOf('dt', indices.start) - 2) -
               indices.start
           )
@@ -201,21 +203,22 @@ function runSimulation(GPUSPHArguments) {
 
         lineInfo.dt = element.substr(
           (indices.start = indices.end + 5), // ", dt=".length() = 5
-          (indices.end = element.indexOf(',', indices.start)) - indices.start
+          (indices.end = element.indexOf('s', indices.start)) - indices.start
         );
 
         lineInfo.parts = element
           .substr(
-            (indices.start = indices.end + 2), // ", ".length() = 2
+            (indices.start = indices.end + 3), // "s, ".length() = 3
             (indices.end = element.indexOf('parts', indices.start) - 1) -
               indices.start
           )
           .replace(',', '');
-        lineInfo.cum = element.substr(
+
+        lineInfo.MIPPS.last = element.substr(
           (indices.start = indices.end + 8), // " parts (".length() = 8
           (indices.end = element.indexOf(',', indices.start)) - indices.start
         );
-        lineInfo.MIPPS = element.substr(
+        lineInfo.MIPPS.cum = element.substr(
           (indices.start = indices.end + 7), // ", cum. ".length() = 7
           (indices.end = element.indexOf('MIPPS', indices.start) - 1) -
             indices.start

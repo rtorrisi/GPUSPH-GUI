@@ -140,10 +140,10 @@ class Dashboard extends Component<Props> {
                 chartTitle="Performance Chart"
                 xLabel="my X"
                 yLabel="my Y"
-                chartTension={0.5}
+                chartTension={0.2}
                 chartData={simulation.map(elem => ({
                   x: elem.iteration,
-                  y: elem.cum
+                  y: elem.MIPPS.last
                 }))}
               />
             </div>
