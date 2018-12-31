@@ -6,8 +6,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import ScatterPlot from '@material-ui/icons/ScatterPlot';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Settings from '@material-ui/icons/Settings';
@@ -94,37 +93,29 @@ class DrawerBar extends Component<Props> {
         </div>
         <Divider style={{ backgroundColor: 'rgba(255,255,255,0.12)' }} />
         <List>
-          {['Performance', 'Simulation'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? (
-                  <InboxIcon classes={{ root: whiteColor }} />
-                ) : (
-                  <MailIcon classes={{ root: whiteColor }} />
-                )}
-              </ListItemIcon>
-              <ListItemText
-                primary={text}
-                style={{ padding: '0px 5px' }}
-                classes={{ primary: whiteColor }}
-              />
-            </ListItem>
-          ))}
+          <ListItem button key="Simulate">
+            <ListItemIcon>
+              <ScatterPlot classes={{ root: whiteColor }} />
+            </ListItemIcon>
+            <ListItemText
+              primary="Simulate"
+              style={{ padding: '0px 5px' }}
+              classes={{ primary: whiteColor }}
+            />
+          </ListItem>
         </List>
         <Divider style={{ backgroundColor: 'rgba(255,255,255,0.12)' }} />
         <List>
-          {['Settings'].map(text => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                <Settings classes={{ root: whiteColor }} />
-              </ListItemIcon>
-              <ListItemText
-                primary={text}
-                style={{ padding: '0px 5px' }}
-                classes={{ primary: whiteColor }}
-              />
-            </ListItem>
-          ))}
+          <ListItem button key="Settings">
+            <ListItemIcon>
+              <Settings classes={{ root: whiteColor }} />
+            </ListItemIcon>
+            <ListItemText
+              primary="Settings"
+              style={{ padding: '0px 5px' }}
+              classes={{ primary: whiteColor }}
+            />
+          </ListItem>
         </List>
       </Drawer>
     );
