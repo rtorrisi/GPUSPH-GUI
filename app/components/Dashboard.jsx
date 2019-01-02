@@ -97,12 +97,13 @@ class Dashboard extends Component<Props> {
     setRunningSimulationStatus(true);
 
     const { maxIter, outDir } = this.props;
-    const GPUSPHArguments = [
-      '--maxiter',
-      maxIter,
-      '--dir',
-      outDir //  tests//Landslide
-    ];
+    const GPUSPHArguments = ['--maxiter', maxIter];
+
+    if (outDir !== 'tests') {
+      GPUSPHArguments.push('--dir');
+      GPUSPHArguments.push(outDir); // tests//Landslide
+    }
+
     ipcRenderer.send('process:start', GPUSPHArguments);
   };
 
