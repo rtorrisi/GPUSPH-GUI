@@ -57,14 +57,15 @@ const styles = theme => ({
 type Props = {
   classes: {},
   open: boolean,
-  toggleAction: () => void
+  toggleAction: () => void,
+  navigate: string => void
 };
 
 class DrawerBar extends Component<Props> {
   toggleDrawer = () => {};
 
   render() {
-    const { classes, open, toggleAction } = this.props;
+    const { navigate, classes, open, toggleAction } = this.props;
     const { drawer, drawerOpen, drawerClose, chevron, whiteColor } = classes;
 
     return (
@@ -93,7 +94,7 @@ class DrawerBar extends Component<Props> {
         </div>
         <Divider style={{ backgroundColor: 'rgba(255,255,255,0.12)' }} />
         <List>
-          <ListItem button key="Simulate">
+          <ListItem button key="Simulate" onClick={() => navigate('/')}>
             <ListItemIcon>
               <ScatterPlot classes={{ root: whiteColor }} />
             </ListItemIcon>
@@ -106,7 +107,7 @@ class DrawerBar extends Component<Props> {
         </List>
         <Divider style={{ backgroundColor: 'rgba(255,255,255,0.12)' }} />
         <List>
-          <ListItem button key="Settings">
+          <ListItem button key="Settings" onClick={() => navigate('/settings')}>
             <ListItemIcon>
               <Settings classes={{ root: whiteColor }} />
             </ListItemIcon>

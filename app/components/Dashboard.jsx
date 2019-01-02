@@ -4,12 +4,13 @@ import { Switch, Route } from 'react-router';
 import { ipcRenderer } from 'electron';
 import { withStyles } from '@material-ui/core/styles';
 
+import DrawerBar from './DrawerBar';
 import Footer from './Footer';
 import Header from './Header';
-import DrawerBar from './DrawerBar';
 import SimulationControlBar from './SimulationControlBar';
 
 import SimulateLayout from '../layouts/SimulateLayout';
+import SettingsLayout from '../layouts/SettingsLayout';
 
 import styles from './styles/Dashboard.css';
 
@@ -30,6 +31,9 @@ type Props = {
     UIActions: {
       toggleDrawer: () => void
     }
+  },
+  history: {
+    push: string => void
   },
   version: string,
   problemName: string,
@@ -126,7 +130,8 @@ class Dashboard extends Component<Props> {
       isSimulating,
       isDrawerOpen
     } = this.props;
-    const { actions } = this.props;
+    const { history, actions } = this.props;
+    const { push } = history;
     const { instanceActions, UIActions } = actions;
     const { setMaxIter, setOutDir } = instanceActions;
     const { toggleDrawer } = UIActions;
@@ -135,9 +140,14 @@ class Dashboard extends Component<Props> {
       <div className={styles.frame}>
         <Header leftTitle={problemName} rightTitle={version} />
         <div className={styles.schema}>
-          <DrawerBar open={isDrawerOpen} toggleAction={toggleDrawer} />
+          <DrawerBar
+            open={isDrawerOpen}
+            toggleAction={toggleDrawer}
+            navigate={path => push(path)}
+          />
           <div className={styles.centralViewport}>
             <Switch>
+              <Route path="/settings" render={() => <SettingsLayout />} />
               <Route
                 path="/"
                 render={() => <SimulateLayout simulation={simulation} />}
