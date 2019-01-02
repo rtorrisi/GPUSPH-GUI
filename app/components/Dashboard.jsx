@@ -1,15 +1,15 @@
 // @flow
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router';
 import { ipcRenderer } from 'electron';
-
 import { withStyles } from '@material-ui/core/styles';
 
 import Footer from './Footer';
 import Header from './Header';
-import Chart from './Chart';
 import DrawerBar from './DrawerBar';
 import SimulationControlBar from './SimulationControlBar';
-import SimulationTable from './SimulationTable';
+
+import SimulateLayout from '../layouts/SimulateLayout';
 
 import styles from './styles/Dashboard.css';
 
@@ -136,18 +136,12 @@ class Dashboard extends Component<Props> {
         <div className={styles.schema}>
           <DrawerBar open={isDrawerOpen} toggleAction={toggleDrawer} />
           <div className={styles.centralViewport}>
-            <div className={styles.chartView}>
-              <Chart
-                xLabel="my X"
-                yLabel="my Y"
-                chartTension={0.2}
-                chartData={simulation.map(elem => ({
-                  x: elem.iteration,
-                  y: elem.MIPPS.last
-                }))}
+            <Switch>
+              <Route
+                path="/"
+                render={() => <SimulateLayout simulation={simulation} />}
               />
-            </div>
-            <SimulationTable tableData={simulation} />
+            </Switch>
             <SimulationControlBar
               isSimulating={isSimulating}
               simulation={simulation}

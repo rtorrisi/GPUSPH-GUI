@@ -19,13 +19,6 @@
   justify-content: space-between;
 }
 
-.chartView {
-  padding: 10px;
-  flex: 1;
-  display: flex;
-  min-height: 140px;
-}
-
 .chips {
   min-width: 100px;
   max-width: 100px;
