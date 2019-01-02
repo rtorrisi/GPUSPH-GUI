@@ -10,6 +10,7 @@ import {
 import type { Action } from './types';
 
 const initialState = {
+  execPath: __dirname.slice(0, -3),
   version: 'unknown-version',
   capability: 'unkwown-capability',
   chrono: false,

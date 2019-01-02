@@ -7,6 +7,7 @@ import * as UIActions from '../actions/UIActions';
 
 function mapStateToProps(state) {
   return {
+    execPath: state.instance.execPath,
     version: state.instance.version,
     problemName: state.instance.problemName,
     HDF5: state.instance.HDF5,

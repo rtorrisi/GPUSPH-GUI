@@ -35,6 +35,7 @@ type Props = {
   history: {
     push: string => void
   },
+  execPath: string,
   version: string,
   problemName: string,
   outDir: string,
@@ -122,6 +123,7 @@ class Dashboard extends Component<Props> {
 
   render() {
     const {
+      execPath,
       version,
       problemName,
       maxIter,
@@ -147,7 +149,10 @@ class Dashboard extends Component<Props> {
           />
           <div className={styles.centralViewport}>
             <Switch>
-              <Route path="/settings" render={() => <SettingsLayout />} />
+              <Route
+                path="/settings"
+                render={() => <SettingsLayout execPath={execPath} />}
+              />
               <Route
                 path="/"
                 render={() => <SimulateLayout simulation={simulation} />}
