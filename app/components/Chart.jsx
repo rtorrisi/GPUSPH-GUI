@@ -40,7 +40,7 @@ class Chart extends Component<Props> {
               data: chartData,
               lineTension: chartTension,
 
-              label: 'cum',
+              label: 'MIPPS',
               fill: true,
               showLine: true,
               backgroundColor: gradientStroke,

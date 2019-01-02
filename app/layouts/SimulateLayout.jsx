@@ -20,8 +20,8 @@ class SimulateLayout extends Component<Props> {
       <>
         <div className={chartView}>
           <Chart
-            xLabel="my X"
-            yLabel="my Y"
+            xLabel="iterations"
+            yLabel="MIPPS"
             chartTension={0.2}
             chartData={simulation.map(elem => ({
               x: elem.iteration,
