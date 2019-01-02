@@ -247,6 +247,7 @@ const wstyles = () => ({
     transition: 'flex 1s, opacity 0.5s'
   },
   progressViewSimulating: {
+    margin: '0px 4px',
     height: '20px',
     opacity: '1',
     transition: 'opacity 4s, height 2s'

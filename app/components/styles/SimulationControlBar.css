@@ -36,6 +36,8 @@
 
 .controlBar {
   display: flex;
+  margin: 0 10px;
+  border-radius: 5px;
   height: 80px;
   background-color: #313641;
 }
