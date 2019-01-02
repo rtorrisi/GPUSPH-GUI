@@ -71,6 +71,7 @@ app.on('ready', async () => {
     width: 1024,
     height: 728
   });
+  mainWindow.setMinimumSize(800, 600);
 
   splash = new BrowserWindow({
     width: 400,
