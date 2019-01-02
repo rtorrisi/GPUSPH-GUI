@@ -1,12 +1,10 @@
 // @flow
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { Switch, Route } from 'react-router';
 import { ConnectedRouter } from 'connected-react-router';
 
 import type { Store } from '../reducers/types';
 
-import routes from './routes';
 import HomePage from '../containers/HomePage';
 
 type Props = {
@@ -20,11 +18,7 @@ export default class Root extends Component<Props> {
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <Fragment>
-            <Switch>
-              <Route path={routes.HOME} component={HomePage} />
-            </Switch>
-          </Fragment>
+          <HomePage />
         </ConnectedRouter>
       </Provider>
     );
