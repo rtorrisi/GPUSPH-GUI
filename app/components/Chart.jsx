@@ -24,14 +24,7 @@ class Chart extends Component<Props> {
     const { chartTension, xLabel, yLabel } = this.props;
 
     this.state = {
-      data: canvas => {
-        const ctx = canvas.getContext('2d');
-        const gradientStroke = ctx.createLinearGradient(0, 0, 0, canvas.height);
-
-        gradientStroke.addColorStop(0, 'rgba(66,134,121,1)');
-        gradientStroke.addColorStop(0.5, 'rgba(66,134,121,0.3)');
-        gradientStroke.addColorStop(1, 'rgba(66,134,121,0)');
-
+      data: () => {
         const { chartData } = this.props;
 
         return {
@@ -41,9 +34,8 @@ class Chart extends Component<Props> {
               lineTension: chartTension,
 
               label: 'MIPPS',
-              fill: true,
+              fill: false,
               showLine: true,
-              backgroundColor: gradientStroke,
               borderColor: '#00d6b4',
               borderWidth: 2,
 
