@@ -68,6 +68,9 @@ export function urlParseParam(url: string) {
       data
     };
   } catch (err) {
-    return {};
+    return {
+      type: SET_INSTANCE_PARAM,
+      data: {}
+    };
   }
 }
