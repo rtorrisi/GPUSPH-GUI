@@ -1,19 +1,32 @@
 import React, { Component } from 'react';
+import { remote } from 'electron';
 import { withStyles } from '@material-ui/core/styles';
-
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+import FolderIcon from '@material-ui/icons/Folder';
 
 type Props = {
   classes: {},
-  execPath: string
+  execPath: string,
+  setExecPath: string => null
 };
 
 class SimulateLayout extends Component<Props> {
   props: Props;
+
+  selectFolder = () => {
+    const { setExecPath } = this.props;
+    const path = remote.dialog.showOpenDialog({
+      title: 'Select a GPUSPH executable',
+      defaultPath: './app',
+      properties: ['openDirectory']
+    });
+    if (path) setExecPath(path);
+  };
 
   render() {
     const { execPath, classes } = this.props;
@@ -33,6 +46,18 @@ class SimulateLayout extends Component<Props> {
                 GPUSPH exe path
               </TableCell>
               <TableCell className={cellRight} align="left">
+                <Button
+                  size="small"
+                  style={{
+                    color: 'white',
+                    margin: '0px 10px 0px 0px',
+                    padding: '5px',
+                    minWidth: 'auto'
+                  }}
+                  onClick={() => this.selectFolder()}
+                >
+                  <FolderIcon style={{ color: 'white' }} />
+                </Button>
                 {execPath}
               </TableCell>
             </TableRow>
