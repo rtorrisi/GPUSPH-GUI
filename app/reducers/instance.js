@@ -5,12 +5,13 @@ import {
   SET_OUT_DIR,
   ADD_SIMULATION_PASS,
   REMOVE_OLD_SIMULATION_DATA,
-  SET_RUNNING_SIMULATION_STATUS
+  SET_RUNNING_SIMULATION_STATUS,
+  SET_EXEC_PATH
 } from '../actions/instanceActions';
 import type { Action } from './types';
 
 const initialState = {
-  execPath: __dirname.slice(0, -3),
+  execPath: __dirname.slice(0, -4),
   version: 'unknown-version',
   capability: 'unkwown-capability',
   chrono: false,
@@ -25,6 +26,8 @@ const initialState = {
 
 export default function instance(state = initialState, action: Action) {
   switch (action.type) {
+    case SET_EXEC_PATH:
+      return { ...state, execPath: action.path };
     case SET_RUNNING_SIMULATION_STATUS:
       return { ...state, isSimulating: action.status };
     case ADD_SIMULATION_PASS:

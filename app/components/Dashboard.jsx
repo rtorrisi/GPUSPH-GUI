@@ -135,7 +135,7 @@ class Dashboard extends Component<Props> {
     const { history, actions } = this.props;
     const { push } = history;
     const { instanceActions, UIActions } = actions;
-    const { setMaxIter, setOutDir } = instanceActions;
+    const { setMaxIter, setOutDir, setExecPath } = instanceActions;
     const { toggleDrawer } = UIActions;
 
     return (
@@ -151,7 +151,12 @@ class Dashboard extends Component<Props> {
             <Switch>
               <Route
                 path="/settings"
-                render={() => <SettingsLayout execPath={execPath} />}
+                render={() => (
+                  <SettingsLayout
+                    execPath={execPath}
+                    setExecPath={setExecPath}
+                  />
+                )}
               />
               <Route
                 path="/"

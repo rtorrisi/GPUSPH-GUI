@@ -1,4 +1,5 @@
 // @flow
+export const SET_EXEC_PATH = 'SET_EXEC_PATH';
 export const SET_RUNNING_SIMULATION_STATUS = 'SET_RUNNING_SIMULATION_STATUS';
 export const ADD_SIMULATION_PASS = 'ADD_SIMULATION_PASS';
 export const REMOVE_OLD_SIMULATION_DATA = 'REMOVE_OLD_SIMULATION_DATA';
@@ -6,6 +7,13 @@ export const SET_OUT_DIR = 'SET_OUT_DIR';
 export const SET_MAX_ITER = 'SET_MAX_ITER';
 export const TOGGLE_PARAM = 'TOGGLE_PARAM';
 export const SET_INSTANCE_PARAM = 'SET_INSTANCE_PARAM';
+
+export function setExecPath(path: string) {
+  return {
+    type: SET_EXEC_PATH,
+    path
+  };
+}
 
 export function setRunningSimulationStatus(status: boolean) {
   return {
