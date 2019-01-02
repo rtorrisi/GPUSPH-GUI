@@ -37,7 +37,7 @@ class SimulateLayout extends Component<Props> {
 
 const wstyles = () => ({
   chartView: {
-    padding: '10px',
+    padding: '30px 10px 10px 10px',
     flex: '1',
     display: 'flex',
     minHeight: '140px'
