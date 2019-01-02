@@ -75,9 +75,9 @@ class Dashboard extends Component<Props> {
   };
 
   componentWillUnmount = () => {
-    ipcRenderer.removeListener('stdout:data');
-    ipcRenderer.removeListener('simPass:data');
-    ipcRenderer.removeListener('childClosed:code');
+    ipcRenderer.removeListener('stdout:data', () => null);
+    ipcRenderer.removeListener('simPass:data', () => null);
+    ipcRenderer.removeListener('childClosed:code', () => null);
   };
 
   startStopSimulation = () => {
