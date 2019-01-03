@@ -9,7 +9,8 @@ import Footer from './Footer';
 import Header from './Header';
 import SimulationControlBar from './SimulationControlBar';
 
-import SimulateLayout from '../layouts/SimulateLayout';
+import ScatterLayout from '../layouts/ScatterLayout';
+import TableLayout from '../layouts/TableLayout';
 import SettingsLayout from '../layouts/SettingsLayout';
 
 import styles from './styles/Dashboard.css';
@@ -159,8 +160,17 @@ class Dashboard extends Component<Props> {
                 )}
               />
               <Route
+                path="/table"
+                render={() => (
+                  <TableLayout
+                    isSimulating={isSimulating}
+                    simulation={simulation}
+                  />
+                )}
+              />
+              <Route
                 path="/"
-                render={() => <SimulateLayout simulation={simulation} />}
+                render={() => <ScatterLayout simulation={simulation} />}
               />
             </Switch>
             <SimulationControlBar

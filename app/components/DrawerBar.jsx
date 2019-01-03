@@ -7,6 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ScatterPlot from '@material-ui/icons/ScatterPlot';
+import TableChart from '@material-ui/icons/TableChart';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Settings from '@material-ui/icons/Settings';
@@ -94,12 +95,22 @@ class DrawerBar extends Component<Props> {
         </div>
         <Divider style={{ backgroundColor: 'rgba(255,255,255,0.12)' }} />
         <List>
-          <ListItem button key="Simulate" onClick={() => navigate('/')}>
+          <ListItem button key="Scatter" onClick={() => navigate('/')}>
             <ListItemIcon>
               <ScatterPlot classes={{ root: whiteColor }} />
             </ListItemIcon>
             <ListItemText
-              primary="Simulate"
+              primary="Scatter"
+              style={{ padding: '0px 5px' }}
+              classes={{ primary: whiteColor }}
+            />
+          </ListItem>
+          <ListItem button key="Table" onClick={() => navigate('/table')}>
+            <ListItemIcon>
+              <TableChart classes={{ root: whiteColor }} />
+            </ListItemIcon>
+            <ListItemText
+              primary="Table"
               style={{ padding: '0px 5px' }}
               classes={{ primary: whiteColor }}
             />
