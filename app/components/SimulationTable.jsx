@@ -28,39 +28,72 @@ type Props = {
 };
 
 class SimulationTable extends Component<Props> {
-  render() { 
+  render() {
     const { tableData, classes } = this.props;
     return (
       <Paper className={classes.root}>
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
-              <TableCell className={classes.cell} align="center">Time (s)</TableCell>
-              <TableCell className={classes.cell} align="center">Iteration</TableCell>
-              <TableCell className={classes.cell} align="center">dt (s)</TableCell>
-              <TableCell className={classes.cell} align="center">Parts</TableCell>
-              <TableCell className={classes.cell} align="center">MIPPS</TableCell>
-              <TableCell className={classes.cell} align="center">MIPPS (cum)</TableCell>
-              <TableCell className={classes.cell} align="center">maxneibs</TableCell>
+              <TableCell className={classes.cell} align="center">
+                Time (s)
+              </TableCell>
+              <TableCell className={classes.cell} align="center">
+                Iteration
+              </TableCell>
+              <TableCell className={classes.cell} align="center">
+                dt (s)
+              </TableCell>
+              <TableCell className={classes.cell} align="center">
+                Parts
+              </TableCell>
+              <TableCell className={classes.cell} align="center">
+                MIPPS
+              </TableCell>
+              <TableCell className={classes.cell} align="center">
+                MIPPS (cum)
+              </TableCell>
+              <TableCell className={classes.cell} align="center">
+                maxneibs
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {tableData ? tableData.map((e, index) => (
-                <TableRow key={index}>
-                  <TableCell className={classes.cell} align="center" component="th" scope="row">{e.time}</TableCell>
-                  <TableCell className={classes.cell} align="center">{e.iteration}</TableCell>
-                  <TableCell className={classes.cell} align="center">{e.dt}</TableCell>
-                  <TableCell className={classes.cell} align="center">{e.parts}</TableCell>
-                  <TableCell className={classes.cell} align="center">{e.MIPPS.last}</TableCell>
-                  <TableCell className={classes.cell} align="center">{e.MIPPS.cum}</TableCell>
-                  <TableCell className={classes.cell} align="center">{e.maxneibs}</TableCell>
-                </TableRow>
-             )).reverse() : null }
+            {tableData.map(e => (
+              <TableRow key={e.id}>
+                <TableCell
+                  className={classes.cell}
+                  align="center"
+                  component="th"
+                  scope="row"
+                >
+                  {e.time}
+                </TableCell>
+                <TableCell className={classes.cell} align="center">
+                  {e.iteration}
+                </TableCell>
+                <TableCell className={classes.cell} align="center">
+                  {e.dt}
+                </TableCell>
+                <TableCell className={classes.cell} align="center">
+                  {e.parts}
+                </TableCell>
+                <TableCell className={classes.cell} align="center">
+                  {e.MIPPS.last}
+                </TableCell>
+                <TableCell className={classes.cell} align="center">
+                  {e.MIPPS.cum}
+                </TableCell>
+                <TableCell className={classes.cell} align="center">
+                  {e.maxneibs}
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </Paper>
     );
   }
 }
- 
+
 export default withStyles(styles)(SimulationTable);
