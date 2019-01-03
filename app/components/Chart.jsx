@@ -43,7 +43,7 @@ class Chart extends Component<Props> {
               pointBorderColor: '#00d6b4',
               pointHoverBackgroundColor: '#00d6b4',
               pointHoverBorderColor: '#fff',
-              pointRadius: 3,
+              pointRadius: 2,
               pointBorderWidth: 1,
               pointHoverRadius: 5,
               pointHoverBorderWidth: 2
@@ -54,7 +54,7 @@ class Chart extends Component<Props> {
       options: {
         maintainAspectRatio: false,
         animation: {
-          duration: 2000
+          duration: 500
         },
         layout: {
           padding: {
