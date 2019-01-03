@@ -20,6 +20,7 @@ const initialState = {
   problemName: 'unknown-problem',
   maxIter: 0,
   outDir: 'tests',
+  numPass: 0,
   isSimulating: false,
   simulation: []
 };
@@ -33,11 +34,16 @@ export default function instance(state = initialState, action: Action) {
     case ADD_SIMULATION_PASS:
       return {
         ...state,
-        simulation: [...state.simulation, action.simulationPass]
+        numPass: state.numPass + 1,
+        simulation: [
+          ...state.simulation,
+          { id: state.numPass, ...action.simulationPass }
+        ]
       };
     case REMOVE_OLD_SIMULATION_DATA:
       return {
         ...state,
+        numPass: 0,
         simulation: []
       };
     case SET_OUT_DIR:
