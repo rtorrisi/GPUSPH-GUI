@@ -15,7 +15,11 @@ class TableLayout extends Component<Props> {
 
     return (
       <SimulationTable
-        tableData={isSimulating ? simulation.slice(-15) : simulation}
+        tableData={
+          isSimulating
+            ? simulation.slice(-30).reverse()
+            : simulation.slice(0).reverse()
+        }
       />
     );
   }
