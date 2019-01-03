@@ -15,7 +15,7 @@ type Props = {
   setExecPath: string => null
 };
 
-class SimulateLayout extends Component<Props> {
+class SettingsLayout extends Component<Props> {
   props: Props;
 
   selectFolder = () => {
@@ -120,4 +120,4 @@ const wstyles = () => ({
     borderBottom: '1px solid rgba(100,100,100,0.5)'
   }
 });
-export default withStyles(wstyles, { withTheme: true })(SimulateLayout);
+export default withStyles(wstyles, { withTheme: true })(SettingsLayout);
