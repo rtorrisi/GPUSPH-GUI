@@ -11,14 +11,16 @@ import log from 'electron-log';
 import MenuBuilder from './menu';
 
 const util = require('util');
-const execFile = util.promisify(require('child_process').execFile);
+const exec = util.promisify(require('child_process').exec);
 const { spawn } = require('child_process');
 
 let GPUSPHProcess = null;
+let execPath = `${__dirname.slice(0, -4).replace(/\\/g, '/')}`;
+
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = true;
 
 async function getVersion() {
-  return execFile('GPUSPH', ['--version']);
+  return exec(`"${execPath}/GPUSPH" --version`);
 }
 
 export default class AppUpdater {
@@ -133,6 +135,23 @@ app.on('ready', async () => {
     console.log('killing process');
     GPUSPHProcess.kill();
   });
+
+  ipcMain.on('execPath:change', (event, path) => {
+    execPath = `${path[0].replace(/\\/g, '/')}`;
+
+    getVersion()
+      .then(res => {
+        const { stdout, stderr, error } = res;
+        console.log(stdout);
+        if (stderr) console.log(stderr);
+        if (error) console.log('error ', error);
+
+        const data = parseGPUSPHInfo(stdout);
+        mainWindow.webContents.send('execPath:updateInfo', data);
+        return true;
+      })
+      .catch(err => console.log(err));
+  });
 });
 
 app.on('window-all-closed', () => {
@@ -173,7 +192,8 @@ function parseGPUSPHInfo(data) {
 }
 
 function runSimulation(GPUSPHArguments) {
-  GPUSPHProcess = spawn('GPUSPH', GPUSPHArguments);
+  if (GPUSPHProcess) GPUSPHProcess.kill();
+  GPUSPHProcess = spawn(`${execPath}/GPUSPH`, GPUSPHArguments);
 
   GPUSPHProcess.stdout.on('data', data => {
     const lines = data.toString().split('\n');

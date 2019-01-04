@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { remote } from 'electron';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
@@ -12,24 +11,14 @@ import FolderIcon from '@material-ui/icons/Folder';
 type Props = {
   classes: {},
   execPath: string,
-  setExecPath: string => null
+  setExecPath: () => null
 };
 
 class SettingsLayout extends Component<Props> {
   props: Props;
 
-  selectFolder = () => {
-    const { setExecPath } = this.props;
-    const path = remote.dialog.showOpenDialog({
-      title: 'Select a GPUSPH executable',
-      defaultPath: './app',
-      properties: ['openDirectory']
-    });
-    if (path) setExecPath(path);
-  };
-
   render() {
-    const { execPath, classes } = this.props;
+    const { execPath, setExecPath, classes } = this.props;
     const { paperStyle, table, cell, cellRight } = classes;
 
     return (
@@ -54,7 +43,7 @@ class SettingsLayout extends Component<Props> {
                     padding: '5px',
                     minWidth: 'auto'
                   }}
-                  onClick={() => this.selectFolder()}
+                  onClick={() => setExecPath()}
                 >
                   <FolderIcon style={{ color: 'white' }} />
                 </Button>

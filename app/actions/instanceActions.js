@@ -1,4 +1,6 @@
 // @flow
+import { remote, ipcRenderer } from 'electron';
+
 export const SET_EXEC_PATH = 'SET_EXEC_PATH';
 export const SET_RUNNING_SIMULATION_STATUS = 'SET_RUNNING_SIMULATION_STATUS';
 export const ADD_SIMULATION_PASS = 'ADD_SIMULATION_PASS';
@@ -7,12 +9,22 @@ export const SET_OUT_DIR = 'SET_OUT_DIR';
 export const SET_MAX_ITER = 'SET_MAX_ITER';
 export const TOGGLE_PARAM = 'TOGGLE_PARAM';
 export const SET_INSTANCE_PARAM = 'SET_INSTANCE_PARAM';
+export const NO_OP = 'NO_OP';
 
-export function setExecPath(path: string) {
-  return {
-    type: SET_EXEC_PATH,
-    path
-  };
+export function setExecPath() {
+  const path = remote.dialog.showOpenDialog({
+    title: 'Select a GPUSPH executable',
+    defaultPath: __dirname.slice(0, -4),
+    properties: ['openDirectory']
+  });
+  if (path) {
+    ipcRenderer.send('execPath:change', path);
+    return {
+      type: SET_EXEC_PATH,
+      path
+    };
+  }
+  return { type: NO_OP };
 }
 
 export function setRunningSimulationStatus(status: boolean) {
@@ -52,6 +64,13 @@ export function toggleParam(param: string) {
   return {
     type: TOGGLE_PARAM,
     param
+  };
+}
+
+export function setInstanceParam(data: {}) {
+  return {
+    type: SET_INSTANCE_PARAM,
+    data
   };
 }
 

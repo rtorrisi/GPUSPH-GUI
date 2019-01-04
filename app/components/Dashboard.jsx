@@ -64,11 +64,18 @@ class Dashboard extends Component<Props> {
   componentDidMount = () => {
     const { actions } = this.props;
     const { instanceActions } = actions;
-    const { addSimulationPass, setRunningSimulationStatus } = instanceActions;
+    const {
+      addSimulationPass,
+      setRunningSimulationStatus,
+      setInstanceParam
+    } = instanceActions;
 
     // ipcRenderer.on('stdout:data', (event, data) => {
     //    shellOutput: `${this.state.shellOutput}\n$ ${data}`
     // });
+    ipcRenderer.on('execPath:updateInfo', (event, GPUSPHInfo) => {
+      setInstanceParam(GPUSPHInfo);
+    });
 
     ipcRenderer.on('simPass:data', (event, simulationPass) => {
       addSimulationPass(simulationPass);
@@ -81,6 +88,7 @@ class Dashboard extends Component<Props> {
   };
 
   componentWillUnmount = () => {
+    ipcRenderer.removeListener('execPath:updateInfo', () => null);
     ipcRenderer.removeListener('stdout:data', () => null);
     ipcRenderer.removeListener('simPass:data', () => null);
     ipcRenderer.removeListener('childClosed:code', () => null);
