@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 import IconButton from '@material-ui/core/IconButton';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import ScatterPlot from '@material-ui/icons/ScatterPlot';
 import TableChart from '@material-ui/icons/TableChart';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Settings from '@material-ui/icons/Settings';
 
-import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
+import DrawerItem from './DrawerItem';
 
 const styles = theme => ({
   drawer: {
@@ -49,9 +47,6 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'flex-end',
     padding: '0px 4px'
-  },
-  whiteColor: {
-    color: 'white'
   }
 });
 
@@ -67,7 +62,7 @@ class DrawerBar extends Component<Props> {
 
   render() {
     const { navigate, classes, open, toggleAction } = this.props;
-    const { drawer, drawerOpen, drawerClose, chevron, whiteColor } = classes;
+    const { drawer, drawerOpen, drawerClose, chevron } = classes;
 
     return (
       <Drawer
@@ -87,47 +82,32 @@ class DrawerBar extends Component<Props> {
         <div className={chevron}>
           <IconButton onClick={toggleAction}>
             {open ? (
-              <ChevronLeftIcon classes={{ root: whiteColor }} />
+              <ChevronLeftIcon style={{ color: 'white' }} />
             ) : (
-              <ChevronRightIcon classes={{ root: whiteColor }} />
+              <ChevronRightIcon style={{ color: 'white' }} />
             )}
           </IconButton>
         </div>
         <Divider style={{ backgroundColor: 'rgba(255,255,255,0.12)' }} />
         <List>
-          <ListItem button key="Scatter" onClick={() => navigate('/')}>
-            <ListItemIcon>
-              <ScatterPlot classes={{ root: whiteColor }} />
-            </ListItemIcon>
-            <ListItemText
-              primary="Scatter"
-              style={{ padding: '0px 5px' }}
-              classes={{ primary: whiteColor }}
-            />
-          </ListItem>
-          <ListItem button key="Table" onClick={() => navigate('/table')}>
-            <ListItemIcon>
-              <TableChart classes={{ root: whiteColor }} />
-            </ListItemIcon>
-            <ListItemText
-              primary="Table"
-              style={{ padding: '0px 5px' }}
-              classes={{ primary: whiteColor }}
-            />
-          </ListItem>
+          <DrawerItem
+            label="Scatter"
+            icon={ScatterPlot}
+            onClick={() => navigate('/')}
+          />
+          <DrawerItem
+            label="Table"
+            icon={TableChart}
+            onClick={() => navigate('/table')}
+          />
         </List>
         <Divider style={{ backgroundColor: 'rgba(255,255,255,0.12)' }} />
         <List>
-          <ListItem button key="Settings" onClick={() => navigate('/settings')}>
-            <ListItemIcon>
-              <Settings classes={{ root: whiteColor }} />
-            </ListItemIcon>
-            <ListItemText
-              primary="Settings"
-              style={{ padding: '0px 5px' }}
-              classes={{ primary: whiteColor }}
-            />
-          </ListItem>
+          <DrawerItem
+            label="Settings"
+            icon={Settings}
+            onClick={() => navigate('/settings')}
+          />
         </List>
       </Drawer>
     );
