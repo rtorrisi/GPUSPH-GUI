@@ -16,6 +16,7 @@ import SettingsLayout from '../layouts/SettingsLayout';
 import styles from './styles/Dashboard.css';
 
 import GPUSPHLogo from '../../resources/gpusph-logo.png';
+import ShellLayout from '../layouts/ShellLayout';
 
 const wstyles = () => ({});
 
@@ -176,6 +177,7 @@ class Dashboard extends Component<Props> {
                   />
                 )}
               />
+              <Route path="/shell" render={() => <ShellLayout />} />
               <Route
                 path="/"
                 render={() => <ScatterLayout simulation={simulation} />}

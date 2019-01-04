@@ -10,6 +10,7 @@ import TableChart from '@material-ui/icons/TableChart';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import Settings from '@material-ui/icons/Settings';
+import Code from '@material-ui/icons/Code';
 
 import DrawerItem from './DrawerItem';
 
@@ -99,6 +100,11 @@ class DrawerBar extends Component<Props> {
             label="Table"
             icon={TableChart}
             onClick={() => navigate('/table')}
+          />
+          <DrawerItem
+            label="Shell"
+            icon={Code}
+            onClick={() => navigate('/shell')}
           />
         </List>
         <Divider style={{ backgroundColor: 'rgba(255,255,255,0.12)' }} />
