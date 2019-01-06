@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './styles/Footer.css';
+import githubMark from '../../resources/icons/GitHubMark.png';
 
 type Props = {
   version: string,
@@ -19,12 +20,42 @@ class Footer extends Component<Props> {
   }
 
   render() {
-    const { footer, logoStyle, textStyle } = styles;
+    const { footer, imgStyle, textStyle, aStyle } = styles;
     const { logo, version } = this.state;
     return (
       <div className={footer}>
-        <img className={logoStyle} alt="logo" src={logo} />
-        <div className={textStyle}>{version}</div>
+        <a
+          className={aStyle}
+          href="https://github.com/GPUSPH/gpusph"
+          onClick={event => {
+            event.preventDefault();
+            window.open(
+              'https://github.com/GPUSPH/gpusph',
+              '_blank',
+              'width=1100,height=600,resizable,scrollbars'
+            );
+          }}
+        >
+          <img className={imgStyle} alt="logo" src={logo} />
+        </a>
+        <div className={textStyle}>
+          {version}
+          <a
+            style={{ marginLeft: '10px' }}
+            className={aStyle}
+            href="https://github.com/rtorrisi/GPUSPH-GUI"
+            onClick={event => {
+              event.preventDefault();
+              window.open(
+                'https://github.com/rtorrisi/GPUSPH-GUI',
+                '_blank',
+                'width=1100,height=600,resizable,scrollbars'
+              );
+            }}
+          >
+            <img className={imgStyle} alt="github" src={githubMark} />
+          </a>
+        </div>
       </div>
     );
   }

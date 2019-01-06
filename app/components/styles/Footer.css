@@ -11,11 +11,21 @@
   z-index: 100;
 }
 
-.logoStyle {
+.aStyle {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.imgStyle {
   height: 70%;
 }
 
 .textStyle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
   font-size: 70%;
 }
 
