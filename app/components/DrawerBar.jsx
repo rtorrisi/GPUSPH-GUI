@@ -102,9 +102,9 @@ class DrawerBar extends Component<Props> {
             onClick={() => navigate('/table')}
           />
           <DrawerItem
-            label="Shell"
+            label="Terminal"
             icon={Code}
-            onClick={() => navigate('/shell')}
+            onClick={() => navigate('/terminal')}
           />
         </List>
         <Divider style={{ backgroundColor: 'rgba(255,255,255,0.12)' }} />
