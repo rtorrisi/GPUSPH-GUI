@@ -31,38 +31,29 @@ class XTerm extends Component<Props> {
     Terminal.applyAddon(fit);
 
     this.term.open(this.termContainer);
-    this.term.fit();
-    this.ptyProc.resize(
-      Math.max(this.term.cols, 1),
-      Math.min(this.term.rows, 1)
-    );
     this.term.focus();
 
     this.term.on('data', (data: string) => {
       this.ptyProc.write(data);
     });
 
-    window.onresize = () => this.term.fit();
-
-    this.term.on('resize', size => {
-      this.ptyProc.resize(
-        Math.max(size ? size.cols : this.term.cols, 1),
-        Math.min(size ? size.rows : this.term.rows, 1)
-      );
-    });
+    window.onresize = () => {
+      this.term.fit();
+      this.ptyProc.resize(this.term.cols, this.term.rows);
+    };
 
     this.ptyProc.on('data', data => {
       this.term.write(data);
     });
-  }
 
-  componentWillUnmount = () => {
-    this.term.off('resize', () => null);
-  };
+    this.term.fit();
+    this.ptyProc.resize(this.term.cols, this.term.rows);
+  }
 
   render() {
     const { classes } = this.props;
     const { terminalContainer } = classes;
+
     return (
       <div
         className={terminalContainer}
