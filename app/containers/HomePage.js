@@ -19,7 +19,8 @@ function mapStateToProps(state) {
     simulation: state.instance.simulation,
     isSimulating: state.instance.isSimulating,
 
-    isDrawerOpen: state.UI.isDrawerOpen
+    isDrawerOpen: state.UI.isDrawerOpen,
+    terminalPath: state.UI.terminalPath
   };
 }
 
