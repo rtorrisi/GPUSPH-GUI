@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import * as os from 'os';
 import * as pty from 'node-pty-prebuilt';
 import { Terminal } from 'xterm';
 import * as fit from 'xterm/lib/addons/fit/fit';
 
 type Props = {
-  classes: {}
+  classes: {},
+  terminalPath: string
 };
 
 class XTerm extends Component<Props> {
@@ -20,16 +20,11 @@ class XTerm extends Component<Props> {
       experimentalCharAtlas: 'dynamic'
     });
 
-    this.ptyProc = pty.spawn(
-      os.platform() === 'win32'
-        ? 'PowerShell.exe'
-        : process.env.SHELL || '/bin/bash',
-      [],
-      {
-        cols: this.term.cols,
-        rows: this.term.rows
-      }
-    );
+    const { terminalPath } = props;
+    this.ptyProc = pty.spawn(terminalPath, [], {
+      cols: this.term.cols,
+      rows: this.term.rows
+    });
   }
 
   componentDidMount() {

@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import XTerm from '../components/XTerm';
 
-class TerminalLayout extends Component {
+type Props = {
+  terminalPath: string
+};
+
+class TerminalLayout extends Component<Props> {
+  props: Props;
+
   render() {
-    return <XTerm />;
+    const { terminalPath } = this.props;
+    return <XTerm terminalPath={terminalPath} />;
   }
 }
 

@@ -11,14 +11,22 @@ import FolderIcon from '@material-ui/icons/Folder';
 type Props = {
   classes: {},
   execPath: string,
-  setExecPath: () => null
+  terminalPath: string,
+  setExecPath: () => null,
+  setTerminalPath: () => null
 };
 
 class SettingsLayout extends Component<Props> {
   props: Props;
 
   render() {
-    const { execPath, setExecPath, classes } = this.props;
+    const {
+      execPath,
+      terminalPath,
+      setExecPath,
+      setTerminalPath,
+      classes
+    } = this.props;
     const { paperStyle, table, cell, cellRight } = classes;
 
     return (
@@ -57,28 +65,22 @@ class SettingsLayout extends Component<Props> {
                 component="th"
                 scope="row"
               >
-                Setting 2
+                Terminal
               </TableCell>
               <TableCell className={cellRight} align="left">
-                2
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell
-                className={cell}
-                style={{ border: '0' }}
-                align="right"
-                component="th"
-                scope="row"
-              >
-                Setting 3
-              </TableCell>
-              <TableCell
-                className={cellRight}
-                style={{ border: '0' }}
-                align="left"
-              >
-                3
+                <Button
+                  size="small"
+                  style={{
+                    color: 'white',
+                    margin: '0px 10px 0px 0px',
+                    padding: '5px',
+                    minWidth: 'auto'
+                  }}
+                  onClick={() => setTerminalPath()}
+                >
+                  <FolderIcon style={{ color: 'white' }} />
+                </Button>
+                {terminalPath}
               </TableCell>
             </TableRow>
           </TableBody>

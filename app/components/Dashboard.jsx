@@ -31,13 +31,15 @@ type Props = {
       setOutDir: () => void
     },
     UIActions: {
-      toggleDrawer: () => void
+      toggleDrawer: () => void,
+      setTerminalPath: () => void
     }
   },
   history: {
     push: string => void
   },
   execPath: string,
+  terminalPath: string,
   version: string,
   problemName: string,
   outDir: string,
@@ -134,6 +136,7 @@ class Dashboard extends Component<Props> {
   render() {
     const {
       execPath,
+      terminalPath,
       version,
       problemName,
       maxIter,
@@ -146,7 +149,7 @@ class Dashboard extends Component<Props> {
     const { push } = history;
     const { instanceActions, UIActions } = actions;
     const { setMaxIter, setOutDir, setExecPath } = instanceActions;
-    const { toggleDrawer } = UIActions;
+    const { toggleDrawer, setTerminalPath } = UIActions;
 
     return (
       <div className={styles.frame}>
@@ -165,6 +168,8 @@ class Dashboard extends Component<Props> {
                   <SettingsLayout
                     execPath={execPath}
                     setExecPath={setExecPath}
+                    terminalPath={terminalPath}
+                    setTerminalPath={setTerminalPath}
                   />
                 )}
               />
@@ -177,7 +182,10 @@ class Dashboard extends Component<Props> {
                   />
                 )}
               />
-              <Route path="/terminal" render={() => <TerminalLayout />} />
+              <Route
+                path="/terminal"
+                render={() => <TerminalLayout terminalPath={terminalPath} />}
+              />
               <Route
                 path="/"
                 render={() => <ScatterLayout simulation={simulation} />}
